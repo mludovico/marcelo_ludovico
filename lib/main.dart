@@ -45,19 +45,25 @@ class MarceloApp extends StatelessWidget {
                   ),
                   Divider(color: Colors.transparent,),
                   Text(
-                      'PORTFOLIO',
-                      style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 25
-                      )
-                  ),
-                  Text(
                     'Marcelo Ludovico',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 25,
                       fontWeight: FontWeight.bold
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FlutterLogo(),
+                      Text(
+                          'LUTTER DEVELOPER',
+                          style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 25
+                          )
+                      ),
+                    ],
                   ),
                   Divider(
                     color: Colors.grey[100],

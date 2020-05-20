@@ -20,100 +20,99 @@ class _IosHomeState extends State<IosHome> {
     void _voltar (){
       Navigator.of(context).pop();
     }
-    return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 3)).then((value){
-        setState(() {
-          _init = true;
-        });
-      }),
-      builder: (context, snapshot) {
-        return !_init ? Center(
-          child: CupertinoActivityIndicator(
-            radius: 20,
-            animating: true,
-          ),
-        ) :
-        Container(
+    return Container(
           color: Material.Colors.grey[850],
           child: Center(
             child: Container(
                 width: 600,
-                child: CupertinoTabScaffold(
-                    tabBar: CupertinoTabBar(
-                        onTap: (page) {
-                          setState(() {
-                            _page = page;
-                          });
-                        },
-                        currentIndex: _page,
-                        items: [
-                          BottomNavigationBarItem(
-                            icon: Icon(Material.Icons.person),
-                            title: Text(_strings.homeTabAbout),
-                          ),
-                          BottomNavigationBarItem(
-                            icon: Icon(MdiIcons.formatListChecks),
-                            title: Text(_strings.homeTabSchool),
-                          ),
-                          BottomNavigationBarItem(
-                            icon: Icon(MdiIcons.tie),
-                            title: Text(_strings.homeTabExperience),
-                          ),
-                          BottomNavigationBarItem(
-                            icon: Icon(MdiIcons.handshake),
-                            title: Text(_strings.homeTabContact),
-                          ),
-                        ]
-                    ),
-                    tabBuilder: (context, index) {
-                      switch (index) {
-                        case 0:
-                          return CupertinoTabView(
-                              builder: (context) =>
-                                  CupertinoPageScaffold(
-                                      navigationBar: _navBar(context, _voltar),
-                                      child: Container(
-                                        color: Material.Colors.blueAccent,
+                child: FutureBuilder(
+                  future: Future.delayed(Duration(seconds: 3), ()=>_init = true),
+                  builder: (context, snapshot) {
+                    return _init ?
+                      Center(
+                        child: CupertinoActivityIndicator(
+                          animating: true,
+                          radius: 25,
+                        ),
+                      ):
+                      CupertinoTabScaffold(
+                        tabBar: CupertinoTabBar(
+                            onTap: (page) {
+                              setState(() {
+                                _page = page;
+                              });
+                            },
+                            currentIndex: _page,
+                            items: [
+                              BottomNavigationBarItem(
+                                icon: Icon(Material.Icons.person),
+                                title: Text(_strings.homeTabAbout),
+                              ),
+                              BottomNavigationBarItem(
+                                icon: Icon(MdiIcons.formatListChecks),
+                                title: Text(_strings.homeTabSchool),
+                              ),
+                              BottomNavigationBarItem(
+                                icon: Icon(MdiIcons.tie),
+                                title: Text(_strings.homeTabExperience),
+                              ),
+                              BottomNavigationBarItem(
+                                icon: Icon(MdiIcons.handshake),
+                                title: Text(_strings.homeTabContact),
+                              ),
+                            ]
+                        ),
+                        tabBuilder: (context, index) {
+                          switch (index) {
+                            case 0:
+                              return CupertinoTabView(
+                                  builder: (context) =>
+                                      CupertinoPageScaffold(
+                                          navigationBar: _navBar(context, _voltar),
+                                          child: Container(
+                                            color: Material.Colors.blueAccent,
+                                          )
                                       )
-                                  )
-                          );
-                          break;
-                        case 1:
-                          return CupertinoTabView(
-                              builder: (context) =>
-                                  CupertinoPageScaffold(
-                                      navigationBar: _navBar(context, _voltar),
-                                      child: Container(
-                                        color: Material.Colors.red,
+                              );
+                              break;
+                            case 1:
+                              return CupertinoTabView(
+                                  builder: (context) =>
+                                      CupertinoPageScaffold(
+                                          navigationBar: _navBar(context, _voltar),
+                                          child: Container(
+                                            color: Material.Colors.red,
+                                          )
                                       )
-                                  )
-                          );
-                          break;
-                        case 2:
-                          return CupertinoTabView(
-                              builder: (context) =>
-                                  CupertinoPageScaffold(
-                                      navigationBar: _navBar(context, _voltar),
-                                      child: Container(
-                                        color: Material.Colors.green,
+                              );
+                              break;
+                            case 2:
+                              return CupertinoTabView(
+                                  builder: (context) =>
+                                      CupertinoPageScaffold(
+                                          navigationBar: _navBar(context, _voltar),
+                                          child: Container(
+                                            color: Material.Colors.green,
+                                          )
                                       )
-                                  )
-                          );
-                          break;
-                        case 3:
-                          return CupertinoTabView(
-                              builder: (context) =>
-                                  CupertinoPageScaffold(
-                                      navigationBar: _navBar(context, _voltar),
-                                      child: Container(
-                                        color: Material.Colors.yellow,
+                              );
+                              break;
+                            case 3:
+                              return CupertinoTabView(
+                                  builder: (context) =>
+                                      CupertinoPageScaffold(
+                                          navigationBar: _navBar(context, _voltar),
+                                          child: Container(
+                                            color: Material.Colors.yellow,
+                                          )
                                       )
-                                  )
-                          );
-                        default:
-                          return null;
-                      }
-                    }
+                              );
+                            default:
+                              return null;
+                          }
+                        }
+                    );
+                  }
                 )
             ),
           ),

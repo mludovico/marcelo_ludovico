@@ -21,47 +21,30 @@ class _AndroidHomeState extends State<AndroidHome> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 3)).then((value){
-        setState(() {
-          _init = true;
-        });
-      }),
-      builder: (context, snapshot) {
-        return !_init ?
-        Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: 300
-              ),
-              child: LinearProgressIndicator(
-                backgroundColor: Colors.grey[300],
-                valueColor: AlwaysStoppedAnimation(
-                    Colors.pinkAccent
-                ),
-              ),
-            )
-        ) :
-        Container(
-          color: Colors.grey[850],
-          child: Center(
-            child: Container(
-              width: 600,
-              child: Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Colors.pinkAccent,
-                  title: Text(_strings.title),
-                  centerTitle: true,
-                  actions: [
-                    Center(
+    return Container(
+      color: Colors.grey[850],
+      child: Center(
+        child: Container(
+          width: 600,
+          child: FutureBuilder(
+            future: Future.delayed(Duration(seconds: 3), ()=>_init = true),
+            builder: (context, snapshot){
+              return _init ?
+                Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Colors.pinkAccent,
+                    title: Text(_strings.title),
+                    centerTitle: true,
+                    actions: [
+                      Center(
                         child: Text(
                           Strings.locale.languageCode.toUpperCase(),
                         )
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
-                      onPressed: () {
-                        showDialog(
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.arrow_drop_down),
+                        onPressed: () {
+                          showDialog(
                             context: context,
                             builder: (context) {
                               return Dialog(
@@ -70,45 +53,45 @@ class _AndroidHomeState extends State<AndroidHome> {
                                   width: 600,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      ListTile(
-                                        title: Text(_strings.langMenuPt),
-                                        onTap: () {
-                                          setState(() {
-                                            Strings.locale = Locale('pt');
-                                          });
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                      ListTile(
-                                        title: Text(_strings.langMenuEn),
-                                        onTap: () {
-                                          setState(() {
-                                            Strings.locale = Locale('en');
-                                          });
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                      ListTile(
-                                        title: Text(_strings.langMenuIt),
-                                        onTap: () {
-                                          setState(() {
-                                            Strings.locale = Locale('it');
-                                          });
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
+                                      children: [
+                                        ListTile(
+                                          title: Text(_strings.langMenuPt),
+                                          onTap: () {
+                                            setState(() {
+                                              Strings.locale = Locale('pt');
+                                            });
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        ListTile(
+                                          title: Text(_strings.langMenuEn),
+                                          onTap: () {
+                                            setState(() {
+                                              Strings.locale = Locale('en');
+                                            });
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        ListTile(
+                                          title: Text(_strings.langMenuIt),
+                                          onTap: () {
+                                            setState(() {
+                                              Strings.locale = Locale('it');
+                                            });
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            }
-                        );
-                      },
-                    )
-                  ],
-                ),
-                body: PageView(
+                                );
+                              }
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                  body: PageView(
                     onPageChanged: (page) {
                       setState(() {
                         _page = page;
@@ -121,14 +104,14 @@ class _AndroidHomeState extends State<AndroidHome> {
                       WorkExperience(),
                       ContactTab(),
                     ]
-                ),
-                bottomNavigationBar: BottomNavigationBar(
+                  ),
+                  bottomNavigationBar: BottomNavigationBar(
                     currentIndex: _page,
                     onTap: (page) {
                       _tabController.animateToPage(
-                          page,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.ease
+                        page,
+                        duration: Duration(milliseconds: 700),
+                        curve: Curves.ease
                       );
                     },
                     items: [
@@ -153,11 +136,27 @@ class _AndroidHomeState extends State<AndroidHome> {
                         icon: Icon(MdiIcons.handshake),
                       ),
                     ]
-                ),
-              ),
-            ),
+                  ),
+                ) :
+                Container(
+                  color: Colors.white,
+                  child: Center(
+                    child: Container(
+                      width: 300,
+                      child: LinearProgressIndicator(
+                        backgroundColor: Colors.grey,
+                        valueColor: AlwaysStoppedAnimation(
+                          Colors.pinkAccent
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+
+            }
           ),
-        );
-      });
+        ),
+      )
+    );
   }
 }
