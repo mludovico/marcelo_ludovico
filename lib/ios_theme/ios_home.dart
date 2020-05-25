@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as Material;
 import 'package:marceloludovico/internationalization/strings.dart';
+import 'package:marceloludovico/ios_theme/tabs/contact_tab.dart';
+import 'package:marceloludovico/ios_theme/tabs/me_tab.dart';
+import 'package:marceloludovico/ios_theme/tabs/school_tab.dart';
+import 'package:marceloludovico/ios_theme/tabs/work_tab.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class IosHome extends StatefulWidget {
@@ -25,10 +29,11 @@ class _IosHomeState extends State<IosHome> {
           child: Center(
             child: Container(
                 width: 600,
+                color: Material.Colors.white,
                 child: FutureBuilder(
-                  future: Future.delayed(Duration(seconds: 3), ()=>_init = true),
+                  future: Future.delayed(Duration(milliseconds: 500), ()=>_init = true),
                   builder: (context, snapshot) {
-                    return _init ?
+                    return !_init ?
                       Center(
                         child: CupertinoActivityIndicator(
                           animating: true,
@@ -37,75 +42,67 @@ class _IosHomeState extends State<IosHome> {
                       ):
                       CupertinoTabScaffold(
                         tabBar: CupertinoTabBar(
-                            onTap: (page) {
-                              setState(() {
-                                _page = page;
-                              });
-                            },
-                            currentIndex: _page,
-                            items: [
-                              BottomNavigationBarItem(
-                                icon: Icon(Material.Icons.person),
-                                title: Text(_strings.homeTabAbout),
-                              ),
-                              BottomNavigationBarItem(
-                                icon: Icon(MdiIcons.formatListChecks),
-                                title: Text(_strings.homeTabSchool),
-                              ),
-                              BottomNavigationBarItem(
-                                icon: Icon(MdiIcons.tie),
-                                title: Text(_strings.homeTabExperience),
-                              ),
-                              BottomNavigationBarItem(
-                                icon: Icon(MdiIcons.handshake),
-                                title: Text(_strings.homeTabContact),
-                              ),
-                            ]
+                          onTap: (page) {
+                            setState(() {
+                              _page = page;
+                            });
+                          },
+                          currentIndex: _page,
+                          items: [
+                            BottomNavigationBarItem(
+                              icon: Icon(Material.Icons.person),
+                              title: Text(_strings.homeTabAbout),
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(MdiIcons.formatListChecks),
+                            title: Text(_strings.homeTabSchool),
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(MdiIcons.tie),
+                              title: Text(_strings.homeTabExperience),
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(MdiIcons.handshake),
+                              title: Text(_strings.homeTabContact),
+                            ),
+                          ]
                         ),
                         tabBuilder: (context, index) {
                           switch (index) {
                             case 0:
                               return CupertinoTabView(
-                                  builder: (context) =>
-                                      CupertinoPageScaffold(
-                                          navigationBar: _navBar(context, _voltar),
-                                          child: Container(
-                                            color: Material.Colors.blueAccent,
-                                          )
-                                      )
+                                builder: (context) =>
+                                  CupertinoPageScaffold(
+                                    navigationBar: _navBar(context, _voltar),
+                                      child: AboutMe()
+                                  )
                               );
                               break;
                             case 1:
                               return CupertinoTabView(
-                                  builder: (context) =>
-                                      CupertinoPageScaffold(
-                                          navigationBar: _navBar(context, _voltar),
-                                          child: Container(
-                                            color: Material.Colors.red,
-                                          )
-                                      )
+                                builder: (context) =>
+                                  CupertinoPageScaffold(
+                                    navigationBar: _navBar(context, _voltar),
+                                      child: EducationTab()
+                                  )
                               );
                               break;
                             case 2:
                               return CupertinoTabView(
-                                  builder: (context) =>
-                                      CupertinoPageScaffold(
-                                          navigationBar: _navBar(context, _voltar),
-                                          child: Container(
-                                            color: Material.Colors.green,
-                                          )
-                                      )
+                                builder: (context) =>
+                                  CupertinoPageScaffold(
+                                    navigationBar: _navBar(context, _voltar),
+                                      child: WorkTab()
+                                  )
                               );
                               break;
                             case 3:
                               return CupertinoTabView(
-                                  builder: (context) =>
-                                      CupertinoPageScaffold(
-                                          navigationBar: _navBar(context, _voltar),
-                                          child: Container(
-                                            color: Material.Colors.yellow,
-                                          )
-                                      )
+                                builder: (context) =>
+                                  CupertinoPageScaffold(
+                                    navigationBar: _navBar(context, _voltar),
+                                      child: HireMeTab()
+                                  )
                               );
                             default:
                               return null;
@@ -117,7 +114,6 @@ class _IosHomeState extends State<IosHome> {
             ),
           ),
         );
-      });
   }
 
   Widget _navBar(BuildContext context, Function voltar){

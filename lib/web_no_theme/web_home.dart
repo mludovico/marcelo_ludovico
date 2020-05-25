@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:marceloludovico/internationalization/strings.dart';
+import 'package:marceloludovico/widgets/custom_app_bar.dart' as Custom;
 
 class WebHome extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _WebHomeState extends State<WebHome> {
 
   @override
   Widget build(BuildContext context){
+    final _narrow = MediaQuery.of(context).size.width < 680;
     _setFocus(0);
     return FutureBuilder(
       future: Future.delayed(Duration(seconds: 3)).then((value){
@@ -32,137 +34,11 @@ class _WebHomeState extends State<WebHome> {
           ),
         );
         else return Scaffold(
-          appBar: AppBar(
+          appBar: Custom.CustomAppBar(
             backgroundColor: Colors.grey[800],
             automaticallyImplyLeading: false,
-            title: SizedBox(
-              height: 56,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  InkWell(
-                    hoverColor: Colors.grey[700],
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Center(
-                        child: Text(
-                          _strings.title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                    ),
-                    onTap: (){
-                      Navigator.of(context).pop();
-                    },
-                    focusColor: Colors.grey[700],
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        InkWell(
-                          focusNode: _aboutFocus,
-                          focusColor: Colors.grey[700],
-                          hoverColor: Colors.grey[700],
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15.0
-                            ),
-                            child: Center(
-                              child: Text(
-                                _strings.homeTabAbout,
-                                style: TextStyle(
-                                    color: Colors.grey[400]
-                                ),
-                              ),
-                            ),
-                          ),
-                          onTap: (){
-                            _pageController.animateToPage(
-                              0,
-                              duration: Duration(milliseconds: 700),
-                              curve: Curves.ease,
-                            );
-                          },
-                        ),
-                        InkWell(
-                          focusNode: _schoolFocus,
-                          focusColor: Colors.grey[700],
-                          hoverColor: Colors.grey[700],
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Center(
-                              child: Text(
-                                _strings.homeTabSchool,
-                                style: TextStyle(
-                                    color: Colors.grey[400]
-                                ),
-                              ),
-                            ),
-                          ),
-                          onTap: (){
-                            _pageController.animateToPage(
-                              1,
-                              duration: Duration(milliseconds: 700),
-                              curve: Curves.ease,
-                            );
-                          },
-                        ),
-                        InkWell(
-                          focusNode: _experienceFocus,
-                          focusColor: Colors.grey[700],
-                          hoverColor: Colors.grey[700],
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Center(
-                              child: Text(
-                                _strings.homeTabExperience,
-                                style: TextStyle(
-                                    color: Colors.grey[400]
-                                ),
-                              ),
-                            ),
-                          ),
-                          onTap: (){
-                            _pageController.animateToPage(
-                              2,
-                              duration: Duration(milliseconds: 700),
-                              curve: Curves.ease,
-                            );
-                          },
-                        ),
-                        InkWell(
-                          focusNode: _contactFocus,
-                          focusColor: Colors.grey[700],
-                          hoverColor: Colors.grey[700],
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                            child: Center(
-                              child: Text(
-                                _strings.homeTabContact,
-                                style: TextStyle(
-                                    color: Colors.grey[400]
-                                ),
-                              ),
-                            ),
-                          ),
-                          onTap: (){
-                            _pageController.animateToPage(
-                              3,
-                              duration: Duration(milliseconds: 700),
-                              curve: Curves.ease,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            leading: _narrow ? _narrowLeading() : _wideLeading(),
+            title: _narrow ? _wideLeading() : _wideRow(),
             actions: [
               Center(
                 child: Text(
@@ -250,5 +126,155 @@ class _WebHomeState extends State<WebHome> {
         FocusScope.of(context).requestFocus(_contactFocus);
         break;
     }
+  }
+
+  Widget _wideRow(){
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              InkWell(
+                focusNode: _aboutFocus,
+                focusColor: Colors.grey[700],
+                hoverColor: Colors.grey[700],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0
+                  ),
+                  child: Center(
+                    child: Text(
+                      _strings.homeTabAbout,
+                      style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 15
+                      ),
+                    ),
+                  ),
+                ),
+                onTap: (){
+                  _pageController.animateToPage(
+                    0,
+                    duration: Duration(milliseconds: 700),
+                    curve: Curves.ease,
+                  );
+                },
+              ),
+              InkWell(
+                focusNode: _schoolFocus,
+                focusColor: Colors.grey[700],
+                hoverColor: Colors.grey[700],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Center(
+                    child: Text(
+                      _strings.homeTabSchool,
+                      style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 15
+                      ),
+                    ),
+                  ),
+                ),
+                onTap: (){
+                  _pageController.animateToPage(
+                    1,
+                    duration: Duration(milliseconds: 700),
+                    curve: Curves.ease,
+                  );
+                },
+              ),
+              InkWell(
+                focusNode: _experienceFocus,
+                focusColor: Colors.grey[700],
+                hoverColor: Colors.grey[700],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Center(
+                    child: Text(
+                      _strings.homeTabExperience,
+                      style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 15
+                      ),
+                    ),
+                  ),
+                ),
+                onTap: (){
+                  _pageController.animateToPage(
+                    2,
+                    duration: Duration(milliseconds: 700),
+                    curve: Curves.ease,
+                  );
+                },
+              ),
+              InkWell(
+                focusNode: _contactFocus,
+                focusColor: Colors.grey[700],
+                hoverColor: Colors.grey[700],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Center(
+                    child: Text(
+                      _strings.homeTabContact,
+                      style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 15
+                      ),
+                    ),
+                  ),
+                ),
+                onTap: (){
+                  _pageController.animateToPage(
+                    3,
+                    duration: Duration(milliseconds: 700),
+                    curve: Curves.ease,
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _wideLeading(){
+    return InkWell(
+      hoverColor: Colors.grey[700],
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8),
+        child: Center(
+          child: Text(
+            _strings.title,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17
+            ),
+          ),
+        ),
+      ),
+      onTap: (){
+        Navigator.of(context).pop();
+      },
+      focusColor: Colors.grey[700],
+    );
+  }
+
+  Widget _narrowLeading(){
+    return InkWell(
+        hoverColor: Colors.grey[700],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Icon(
+            Icons.menu,
+            color: Colors.white,
+          ),
+        ),
+        onTap: (){},
+      );
   }
 }

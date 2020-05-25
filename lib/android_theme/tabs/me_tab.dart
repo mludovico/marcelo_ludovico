@@ -1,7 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:marceloludovico/internationalization/strings.dart';
+import 'package:marceloludovico/widgets/info_row.dart';
 
 class AboutMe extends StatelessWidget {
 
@@ -16,16 +16,15 @@ class AboutMe extends StatelessWidget {
           initiallyExpanded: true,
           title: Text(_strings.aboutPersonal),
           children: [
-            _infoRow(
+            infoRow(
               label: _strings.aboutPersonalNameLabel,
               value: _strings.aboutPersonalNameValue,
             ),
-
-            _infoRow(
+            infoRow(
               label: _strings.aboutPersonalAgeLabel,
               value: _strings.aboutPersonalAgeValue,
             ),
-            _infoRow(
+            infoRow(
               label: _strings.aboutPersonalMissionLabel,
               value: _strings.aboutPersonalMissionValue
             ),
@@ -34,7 +33,7 @@ class AboutMe extends StatelessWidget {
         ExpansionTile(
           title: Text(_strings.aboutLocation),
           children: [
-            _infoRow(
+            infoRow(
               label: _strings.aboutLocationLabel,
               value: _strings.aboutLocationValue,
             ),
@@ -60,35 +59,6 @@ class AboutMe extends StatelessWidget {
           }).toList()
         ),
       ],
-    );
-  }
-
-  Widget _infoRow({String label, String value}){
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0, left: 8),
-            child: Text(
-              '${label}:',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              softWrap: true,
-              style: TextStyle(
-                  fontSize: 17
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

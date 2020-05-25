@@ -36,6 +36,57 @@ class _AndroidHomeState extends State<AndroidHome> {
                     title: Text(_strings.title),
                     centerTitle: true,
                     actions: [
+                      IconButton(
+                        icon: Icon(Icons.info),
+                        onPressed: (){
+                          showDialog(
+                            context: context,
+                            builder: (context){
+                              return AlertDialog(
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15)
+                                  )
+                                ),
+                                title: Text(
+                                  'Marcelo Ludovico\'s Portfolio',
+                                  softWrap: true,
+                                ),
+                                content: Builder(
+                                  builder: (context) {
+                                    return Container(
+                                      width: 400,
+                                      height: 500,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            _strings.aboutDialog,
+                                            softWrap: true,
+                                            textAlign: TextAlign.justify,
+                                          ),
+                                          Expanded(
+                                            child: Center(
+                                              child: FlutterLogo(size: 80,)
+                                            )
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                ),
+                                actions: [
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: ()=>Navigator.of(context).pop(),
+                                  )
+                                ],
+                              );
+                            }
+                          );
+                        },
+                      ),
+                      VerticalDivider(width: 8,),
                       Center(
                         child: Text(
                           Strings.locale.languageCode.toUpperCase(),
