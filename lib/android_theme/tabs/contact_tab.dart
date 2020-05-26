@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marceloludovico/internationalization/strings.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -21,12 +20,10 @@ class ContactTab extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20),
             children: [
               Container(
-                constraints: BoxConstraints.tightFor(
-                  width: _width/2
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 150, vertical: 20),
+                height: 300,
                 child: CircleAvatar(
-                  minRadius: _width/3,
-                  maxRadius: _width/3,
+                  radius: 150,
                   backgroundColor: Colors.transparent,
                   backgroundImage: AssetImage('img/profile.jpg'),
                 ),

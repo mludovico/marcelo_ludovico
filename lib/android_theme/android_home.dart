@@ -27,7 +27,7 @@ class _AndroidHomeState extends State<AndroidHome> {
         child: Container(
           width: 600,
           child: FutureBuilder(
-            future: Future.delayed(Duration(seconds: 3), ()=>_init = true),
+            future: Future.delayed(Duration(milliseconds: 1500), ()=>_init = true),
             builder: (context, snapshot){
               return _init ?
                 Scaffold(
@@ -56,8 +56,8 @@ class _AndroidHomeState extends State<AndroidHome> {
                                 content: Builder(
                                   builder: (context) {
                                     return Container(
-                                      width: 400,
-                                      height: 500,
+                                      width: 300,
+                                      height: 200,
                                       child: Column(
                                         children: [
                                           Text(

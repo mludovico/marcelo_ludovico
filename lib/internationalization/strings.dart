@@ -25,7 +25,7 @@ class Strings {
       'aboutPersonalNameLabel': 'Name',
       'aboutPersonalNameValue': 'Marcelo Ludovico de Paula',
       'aboutPersonalAgeLabel': 'Age',
-      'aboutPersonalAgeValue': '$_age',
+      'aboutPersonalAgeValue': '$_age years old',
       'aboutPersonalMissionLabel': 'Purpose',
       'aboutPersonalMissionValue': 'To find simple and creative solutions to'
           ' people\'s problems and pains',
@@ -139,7 +139,7 @@ class Strings {
       'aboutPersonalNameLabel': 'Nome',
       'aboutPersonalNameValue': 'Marcelo Ludovico de Paula',
       'aboutPersonalAgeLabel': 'Età',
-      'aboutPersonalAgeValue': '$_age',
+      'aboutPersonalAgeValue': '$_age anni',
       'aboutPersonalMissionLabel': 'Scopo',
       'aboutPersonalMissionValue': 'Trovare soluzione semplice e creative per'
           ' dolori e problemi delle persone',
@@ -254,7 +254,7 @@ class Strings {
       'aboutPersonalNameLabel': 'Nome',
       'aboutPersonalNameValue': 'Marcelo Ludovico de Paula',
       'aboutPersonalAgeLabel': 'Idade',
-      'aboutPersonalAgeValue': '$_age',
+      'aboutPersonalAgeValue': '$_age anos',
       'aboutPersonalMissionLabel': 'Propósito',
       'aboutPersonalMissionValue': 'Buscar soluções simples e criativas para as'
           ' dores e problemas das pessoas usando tecnologia',

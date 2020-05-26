@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:marceloludovico/internationalization/strings.dart';
 import 'package:flutter/material.dart' as Material;
@@ -10,66 +12,121 @@ class HireMeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-
+    print(_width);
     return Material.Scaffold(
       backgroundColor: CupertinoColors.systemGrey6,
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
             child: ListView(
               children: [
                 Container(
-                  constraints: BoxConstraints.tight(
-                    Size(_width / 4, _width / 4)
-                  ),
+                  color: CupertinoColors.white,
+                  padding: EdgeInsets.symmetric(horizontal: 150, vertical: 20),
                   child: Material.CircleAvatar(
-                    minRadius: _width/5,
-                    maxRadius: _width/5,
+                    radius: 150,
                     backgroundColor: Material.Colors.transparent,
                     backgroundImage: AssetImage('img/profile.jpg',),
                   ),
                 ),
-                Material.ListTile(
-                  leading: Icon(MdiIcons.whatsapp),
-                  title: Text(_strings.contacts['phoneLabel']),
-                  subtitle: Text(_strings.contacts['phone']),
-                  onTap: (){
-                    _tryLaunch('tel:${_strings.contacts['phone']}');
-                  },
+                Material.Divider(
+                  color: CupertinoColors.systemGrey3,
+                  height: 1,
+                  thickness: 1,
                 ),
-                Material.ListTile(
-                  leading: Icon(MdiIcons.skype),
-                  title: Text('Skype'),
-                  subtitle: Text(_strings.contacts['skype']),
-                  onTap: (){
-                    _tryLaunch('skype:${_strings.contacts['skype']}?add');
-                  },
+                Container(
+                  color: CupertinoColors.white,
+                  child: Material.ListTile(
+                    leading: Icon(
+                      MdiIcons.whatsapp,
+                      color: Color.fromARGB(255, 37, 211, 102),
+                    ),
+                    title: Text(_strings.contacts['phoneLabel']),
+                    subtitle: Text(_strings.contacts['phone']),
+                    onTap: (){
+                      _tryLaunch('tel:${_strings.contacts['phone']}');
+                    },
+                  ),
                 ),
-                Material.ListTile(
-                  leading: Icon(CupertinoIcons.mail_solid),
-                  title: Text('E-mail'),
-                  subtitle: Text(_strings.contacts['mail']),
-                  onTap: (){
-                    _tryLaunch('mailto:${_strings.contacts['mail']}');
-                  },
+                Material.Divider(
+                  color: CupertinoColors.systemGrey3,
+                  height: 1,
+                  thickness: 1,
                 ),
-                Material.ListTile(
-                  leading: Icon(MdiIcons.linkedin),
-                  title: Text('LinkedIn'),
-                  subtitle: Text(_strings.contacts['linkedin']),
-                  onTap: (){
-                    _tryLaunch(_strings.contacts['linkedin']);
-                  },
+                Container(
+                  color: CupertinoColors.white,
+                  child: Material.ListTile(
+                    leading: Icon(
+                      MdiIcons.skype,
+                      color: Color.fromARGB(255, 0, 175, 240),
+                    ),
+                    title: Text('Skype'),
+                    subtitle: Text(_strings.contacts['skype']),
+                    onTap: (){
+                      _tryLaunch('skype:${_strings.contacts['skype']}?add');
+                    },
+                  ),
                 ),
-                Material.ListTile(
-                  leading: Icon(MdiIcons.github),
-                  title: Text('Github'),
-                  subtitle: Text(_strings.contacts['github']),
-                  onTap: (){
-                    _tryLaunch(_strings.contacts['github']);
-                  },
+                Material.Divider(
+                  color: CupertinoColors.systemGrey3,
+                  height: 1,
+                  thickness: 1,
+                ),
+                Container(
+                  color: CupertinoColors.white,
+                  child: Material.ListTile(
+                    leading: Container(
+                      child: Icon(
+                        CupertinoIcons.mail_solid,
+                        color: Color.fromARGB(255, 239, 204, 86),
+                      ),
+                    ),
+                    title: Text('E-mail'),
+                    subtitle: Text(_strings.contacts['mail']),
+                    onTap: (){
+                      _tryLaunch('mailto:${_strings.contacts['mail']}');
+                    },
+                  ),
+                ),
+                Material.Divider(
+                  color: CupertinoColors.systemGrey3,
+                  height: 1,
+                  thickness: 1,
+                ),
+                Container(
+                  color: CupertinoColors.white,
+                  child: Material.ListTile(
+                    leading: Icon(
+                      MdiIcons.linkedin,
+                      color: Color.fromARGB(255, 14, 118, 168),
+                    ),
+                    title: Text('LinkedIn'),
+                    subtitle: Text(_strings.contacts['linkedin']),
+                    onTap: (){
+                      _tryLaunch(_strings.contacts['linkedin']);
+                    },
+                  ),
+                ),
+                Material.Divider(
+                  color: CupertinoColors.systemGrey3,
+                  height: 1,
+                  thickness: 1,
+                ),
+                Container(
+                  color: CupertinoColors.white,
+                  child: Material.ListTile(
+                    leading: Icon(
+                      MdiIcons.github,
+                      color: Color.fromARGB(255, 36, 41, 46),
+                    ),
+                    title: Text('Github'),
+                    subtitle: Text(_strings.contacts['github']),
+                    onTap: (){
+                      _tryLaunch(_strings.contacts['github']);
+                    },
+                  ),
                 ),
               ],
             ),

@@ -31,7 +31,7 @@ class _IosHomeState extends State<IosHome> {
                 width: 600,
                 color: Material.Colors.white,
                 child: FutureBuilder(
-                  future: Future.delayed(Duration(milliseconds: 500), ()=>_init = true),
+                  future: Future.delayed(Duration(milliseconds: 1500), ()=>_init = true),
                   builder: (context, snapshot) {
                     return !_init ?
                       Center(
@@ -50,11 +50,11 @@ class _IosHomeState extends State<IosHome> {
                           currentIndex: _page,
                           items: [
                             BottomNavigationBarItem(
-                              icon: Icon(Material.Icons.person),
+                              icon: Icon(CupertinoIcons.person_solid),
                               title: Text(_strings.homeTabAbout),
                             ),
                             BottomNavigationBarItem(
-                              icon: Icon(MdiIcons.formatListChecks),
+                              icon: Icon(CupertinoIcons.book_solid),
                             title: Text(_strings.homeTabSchool),
                             ),
                             BottomNavigationBarItem(
@@ -119,10 +119,20 @@ class _IosHomeState extends State<IosHome> {
   Widget _navBar(BuildContext context, Function voltar){
     return CupertinoNavigationBar(
       leading: GestureDetector(
-        child: Icon(
-          Material.Icons.arrow_back_ios,
-          size: 25,
-          color: Material.Colors.blueAccent,
+        child: Row(
+          children: [
+            Icon(
+              Material.Icons.arrow_back_ios,
+              size: 25,
+              color: CupertinoColors.systemBlue,
+            ),
+            Text(
+              'Home',
+              style: TextStyle(
+                color: CupertinoColors.systemBlue
+              ),
+            )
+          ],
         ),
         onTap: voltar
       ),
@@ -131,6 +141,52 @@ class _IosHomeState extends State<IosHome> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          GestureDetector(
+            child: Icon(
+              CupertinoIcons.info,
+              color: CupertinoColors.systemBlue,
+            ),
+            onTap: (){
+              Material.showDialog(
+                context: context,
+                builder: (context){
+                  return CupertinoAlertDialog(
+                    title: Text(
+                      'Marcelo Ludovico\'s Portfolio',
+                      softWrap: true,
+                    ),
+                    content: Builder(
+                      builder: (context) {
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              _strings.aboutDialog,
+                              softWrap: true,
+                              textAlign: TextAlign.justify,
+                            ),
+                            Center(
+                              child: Material.FlutterLogo(size: 80,)
+                            )
+                          ],
+                        );
+                      }
+                    ),
+                    actions: [
+                      Material.FlatButton(
+                        child: Text('OK'),
+                        onPressed: ()=>Navigator.of(context).pop(),
+                      )
+                    ],
+                  );
+                }
+              );
+            },
+          ),
+          Material.VerticalDivider(
+            width: 25,
+            color: Material.Colors.transparent,
+          ),
           Text(
             Strings.locale.languageCode,
             style: TextStyle(
